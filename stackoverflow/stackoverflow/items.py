@@ -10,3 +10,4 @@ import scrapy
 
 class JobItem(scrapy.Item):
     id = scrapy.Field()
+    tags = scrapy.Field()
