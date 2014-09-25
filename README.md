@@ -14,3 +14,5 @@ source env/bin/activate
 pip install lxml
 sudo apt-get install libffi-dev
 pip install Scrapy
+
+scrapy crawl jobs -o items.json
