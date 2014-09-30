@@ -13,5 +13,9 @@ BOT_NAME = 'stackoverflow'
 SPIDER_MODULES = ['stackoverflow.spiders']
 NEWSPIDER_MODULE = 'stackoverflow.spiders'
 
+ITEM_PIPELINES = {
+    'stackoverflow.pipelines.JsonWriterPipeline': 500,
+}
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stackoverflow (+http://www.yourdomain.com)'
