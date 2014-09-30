@@ -5,9 +5,11 @@ from stackoverflow.items import JobItem
 class JobSpider(scrapy.Spider):
     name = "jobs"
     allowed_domains = ["careers.stackoverflow.com"]
-    start_urls = [
-        "http://careers.stackoverflow.com/jobs"
-    ]
+
+    def start_requests(self):
+        # Fix harcoded top limit 100
+        for i in xrange(1, 100):
+            yield self.make_requests_from_url("http://careers.stackoverflow.com/jobs/?pg=%d" % i)
 
     def parse(self, response):
         # <div data-jobid="68943">...</div>
