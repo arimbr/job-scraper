@@ -8,10 +8,6 @@ import json
 
 FILE = 'items.json'
 
-class StackoverflowPipeline(object):
-    def process_item(self, item, spider):
-        return item
-
 class JsonWriterPipeline(object):
 
     def __init__(self):
@@ -21,5 +17,9 @@ class JsonWriterPipeline(object):
         line = json.dumps(dict(item)) + "\n"
         self.file.write(line)
         return item
+
+
+
+
 
         
