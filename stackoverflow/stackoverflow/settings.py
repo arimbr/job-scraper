@@ -14,6 +14,7 @@ SPIDER_MODULES = ['stackoverflow.spiders']
 NEWSPIDER_MODULE = 'stackoverflow.spiders'
 
 ITEM_PIPELINES = {
+    'stackoverflow.pipelines.DuplicatesPipeline': 100,
     'stackoverflow.pipelines.JsonWriterPipeline': 500,
 }
 
