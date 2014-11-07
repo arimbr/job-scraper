@@ -18,5 +18,6 @@ ITEM_PIPELINES = {
     'stackoverflow.pipelines.JsonWriterPipeline': 500,
 }
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
+# Crawl responsibly by identifying yourself
+# (and your website) on the user-agent
 #USER_AGENT = 'stackoverflow (+http://www.yourdomain.com)'

@@ -10,6 +10,7 @@ from scrapy.exceptions import DropItem
 
 FILE = 'items.json'
 
+
 class DuplicatesPipeline(object):
 
     ids = []
@@ -29,14 +30,8 @@ class JsonWriterPipeline(object):
 
     def __init__(self):
         self.file = open(FILE, 'a')
-        
+
     def process_item(self, item, spider):
         line = json.dumps(dict(item)) + "\n"
         self.file.write(line)
         return item
-
-
-
-
-
-        
