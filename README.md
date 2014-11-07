@@ -5,7 +5,7 @@ Scraping jobs data from Stack Overflow Careers
 
 Requried packages:
 ```
-sudo apt-get install python-dev libxml2-dev libxslt-dev libffi-dev
+sudo apt-get install python-dev libxml2-dev libxslt-dev libffi-dev build-essential libssl-dev libffi-dev
 ```
 Set up:
 ```
