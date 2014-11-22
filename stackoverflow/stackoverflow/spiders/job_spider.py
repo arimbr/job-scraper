@@ -11,7 +11,7 @@ class JobSpider(scrapy.Spider):
     start_time = datetime.datetime.now()
 
     def start_requests(self):
-        for i in xrange(1, 2):
+        for i in xrange(1, 100):
             yield self.make_requests_from_url(
                 "http://careers.stackoverflow.com/jobs/?pg=%d" % i)
 
@@ -46,4 +46,11 @@ class JobSpider(scrapy.Spider):
         """
         job = response.meta['job']
         job['url'] = response.url
+        des_sel = response.xpath('//div[@class="description"]')
+        description = []
+        for sel in des_sel:
+            des_text = sel.xpath('.//text()').extract()
+            des_list = filter(lambda item: item.strip(), des_text)
+            description.append(' '.join(des_list))
+        job['description'] = description
         return job
