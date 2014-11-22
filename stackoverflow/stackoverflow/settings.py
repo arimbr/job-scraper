@@ -12,6 +12,7 @@ BOT_NAME = 'stackoverflow'
 
 SPIDER_MODULES = ['stackoverflow.spiders']
 NEWSPIDER_MODULE = 'stackoverflow.spiders'
+DOWNLOAD_DELAY = 0.5
 
 ITEM_PIPELINES = {
     'stackoverflow.pipelines.DuplicatesPipeline': 100,
