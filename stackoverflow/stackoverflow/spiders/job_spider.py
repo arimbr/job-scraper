@@ -8,6 +8,7 @@ from stackoverflow.items import JobItem
 class JobSpider(scrapy.Spider):
     name = "jobs"
     allowed_domains = ["careers.stackoverflow.com"]
+    base_url = "http://careers.stackoverflow.com"
     start_time = datetime.datetime.now()
 
     def start_requests(self):
@@ -24,17 +25,16 @@ class JobSpider(scrapy.Spider):
 
         for sel in jobs:
             job = JobItem()
-            jobid = sel.xpath('.//@data-jobid')[0].extract()
+            path = sel.xpath('.//h3/a').xpath('@href')[0].extract()
             location = sel.css('.location::text')[1].extract() \
                           .strip().split()[1:]
-            job['id'] = jobid
+            job['id'] = sel.xpath('.//@data-jobid')[0].extract()
             job['date'] = self.start_time.isoformat()
             job['title'] = sel.xpath('.//h3/a/text()')[0].extract()
             job['employer'] = sel.css('.-employer::text')[0].extract()
             job['location'] = ' '.join(location).split(', ')
             job['tags'] = sel.css('.post-tag::text').extract()
-            request = scrapy.Request("http://careers.stackoverflow.com/jobs/" +
-                                     jobid,
+            request = scrapy.Request(self.base_url + path,
                                      callback=self.parse_job_detail_page)
             request.meta['job'] = job
             yield request
