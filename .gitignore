@@ -5,6 +5,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Scraped data
+*.json
+
 # Distribution / packaging
 .Python
 env/
