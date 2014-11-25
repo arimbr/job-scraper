@@ -47,10 +47,11 @@ class JobSpider(scrapy.Spider):
         job = response.meta['job']
         job['url'] = response.url
         des_sel = response.xpath('//div[@class="description"]')
-        description = []
+        descriptions = []
         for sel in des_sel:
-            des_text = sel.xpath('.//text()').extract()
-            des_list = filter(lambda item: item.strip(), des_text)
-            description.append(' '.join(des_list))
-        job['description'] = description
+            des = sel.xpath('.//text()').extract()
+            des = map(lambda item: item.strip(), des)
+            des = filter(lambda item: item, des)
+            descriptions.append(' '.join(des))
+        job['description'] = descriptions
         return job
