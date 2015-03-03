@@ -35,9 +35,9 @@ class JsonWriterPipeline(object):
 
     def process_item(self, item, spider):
         item = dict(item)
-        dline = json.dumps({"id": item["id"],
-                            "description": item.pop("description")}) + "\n"
+        # dline = json.dumps({"id": item["id"],
+        #                     "description": item.pop("description")}) + "\n"
         iline = json.dumps(item) + "\n"
-        self.dfile.write(dline)
+        # self.dfile.write(dline)
         self.ifile.write(iline)
         return item
