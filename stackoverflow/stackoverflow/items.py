@@ -10,7 +10,7 @@ import scrapy
 
 class JobItem(scrapy.Item):
     id = scrapy.Field()  # "68734"
-    title = scrapy.Field()  # Python developer
+    title = scrapy.Field()  # "Python developer"
     tags = scrapy.Field()  # ["ptyhon", "django"]
     date = scrapy.Field()
     location = scrapy.Field()

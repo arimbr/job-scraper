@@ -9,7 +9,16 @@ import json
 from scrapy.exceptions import DropItem
 
 IFILE = 'items.json'
-DFILE = 'descriptions.json'
+
+
+def format_location(s):
+    return s.strip()
+
+
+def format_description(l):
+    l = map(lambda s: s.strip(), l)
+    l = filter(lambda s: s, l)
+    return l  # returns a list of cleaned non empty phrases
 
 
 class DuplicatesPipeline(object):
@@ -27,17 +36,21 @@ class DuplicatesPipeline(object):
             return item
 
 
+class FormatPipeline(object):
+
+    def process_item(self, item, spider):
+        item['location'] = format_location(item['location'])
+        item['description'] = format_description(item['description'])
+        return item
+
+
 class JsonWriterPipeline(object):
 
     def __init__(self):
         self.ifile = open(IFILE, 'a')
-        self.dfile = open(DFILE, 'a')
 
     def process_item(self, item, spider):
         item = dict(item)
-        # dline = json.dumps({"id": item["id"],
-        #                     "description": item.pop("description")}) + "\n"
         iline = json.dumps(item) + "\n"
-        # self.dfile.write(dline)
         self.ifile.write(iline)
         return item

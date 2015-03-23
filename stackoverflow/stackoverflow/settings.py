@@ -16,6 +16,7 @@ DOWNLOAD_DELAY = 0.5
 
 ITEM_PIPELINES = {
     'stackoverflow.pipelines.DuplicatesPipeline': 100,
+    'stackoverflow.pipelines.FormatPipeline': 200,
     'stackoverflow.pipelines.JsonWriterPipeline': 500,
 }
 
