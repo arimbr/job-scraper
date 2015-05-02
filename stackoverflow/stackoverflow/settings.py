@@ -14,9 +14,15 @@ SPIDER_MODULES = ['stackoverflow.spiders']
 NEWSPIDER_MODULE = 'stackoverflow.spiders'
 DOWNLOAD_DELAY = 0.5
 
+MONGO_SERVER = 'localhost'
+MONGO_PORT = 27017
+MONGO_DB = 'stackoverflow'
+MONGO_COLLECTION = 'jobs'
+
 ITEM_PIPELINES = {
-    'stackoverflow.pipelines.DuplicatesPipeline': 100,
-    'stackoverflow.pipelines.FormatPipeline': 200,
+    'stackoverflow.pipelines.FormatPipeline': 100,
+    'stackoverflow.pipelines.MongoDBPipeline': 200,
+    'stackoverflow.pipelines.DuplicatesPipeline': 300,
     'stackoverflow.pipelines.JsonWriterPipeline': 500,
 }
 

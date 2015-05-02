@@ -1,7 +1,6 @@
 import datetime
 
 import scrapy
-from scrapy import log
 
 from stackoverflow.items import JobItem
 
@@ -14,6 +13,10 @@ class JobSpider(scrapy.Spider):
     start_time = datetime.datetime.now()
 
     def start_requests(self):
+        # Through the browser says that there are 1545 jobs 
+        # ( 1500 / 25 jobs per page = 60 pages)
+        # but when using wget or scrapy page 100 contain josb
+        # and html says that there are 3560 jobs
         for i in xrange(1, 100):
             yield self.make_requests_from_url(
                 "http://careers.stackoverflow.com/jobs/?pg=%d" % i)
@@ -43,7 +46,6 @@ class JobSpider(scrapy.Spider):
         Get job url, date, title, employer, tags, location and description
         Returns job item to pipeline
         """
-        #log.msg("We got a request to: " + response.url)
         job = response.meta['job']
         job['url'] = response.url
         job['date'] = self.start_time.isoformat()
